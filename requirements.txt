@@ -1,0 +1,8 @@
+
+beautifulsoup4==4.11.1
+fastapi==0.88.0
+nltk==3.8
+numpy==1.24.0
+pycurl==7.45.2
+sumy==0.11.0
+uvicorn==0.20.0
