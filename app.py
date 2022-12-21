@@ -16,7 +16,7 @@ tags_metadata = [
     
 ]
 
-api = FastAPI(openapi_tags=tags_metadata, title="Websumry - summarize an website anytime!")
+api = FastAPI(openapi_tags=tags_metadata, title="Websumry - summarize a website anytime!")
 
 class SumryInput(BaseModel):
     url:str 
