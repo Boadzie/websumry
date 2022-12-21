@@ -1,15 +1,39 @@
 # Websumry
 
-> This project uses the Sumy library to extract a summary of the text on a website.
+![websumry](./websumry.webm)
+
+> WebSumry is a powerful tool that helps you quickly summarize the content of a website. With WebSumry, you can easily extract the key points and main ideas from long articles and pages, saving you time and helping you stay informed on the topics that matter to you.
+
+> One of the key features of WebSumry is its advanced algorithm, which uses natural language processing techniques to identify and extract the most important information from a website. This allows you to get a clear and concise summary of the content, without missing any key points.
+
+> In addition to summarizing websites, WebSumry also allows you to customize the length of the summary, so you can get a brief overview or a more detailed summary depending on your needs.
+
+> Overall, WebSumry is a valuable tool for anyone looking to stay informed and save time by quickly and accurately summarizing the content of websites. So, it can be a great help for students, professionals, and anyone else who needs to stay up to date on the latest news and information.
 
 ## Prerequisites
 
-Before you can use this project, you will need to have the following software installed:
+Before you can use this project, you will need to have the following software installed preferably in a virtualenv:
 
-- Python 3.6 or higher
+- Python 3.10 or higher
 - The Sumy library (install with pip install sumy)
-- The requests library (install with pip install requests)
-- The Beautiful Soup library (install with pip install - beautifulsoup4)
+- The pycurl library (install with pip install pycurl)
+- The Beautiful Soup library (install with pip install bs4)
+
+Create a virtual environment for the project. Then activate it.
+
+```bash
+# create a virtual environment for the project
+python3 -m ven .myenv
+
+# activate the virtual environment
+source .myenv/bin/activate
+```
+
+Then install all the dependencies from the `requirements.txt` file.
+
+```bash
+pip install -r requirements.txt
+```
 
 ## Usage
 
@@ -20,10 +44,10 @@ To use this project, simply run the summarize_website.py script and pass in the 
 - stop_words: A list of words that should be given less weight in the summarization process (optional)
 - bonus_words: A list of words that should be given more weight in the summarization process (optional)
 
-For example:
+run it like this in the project root directory:
 
 ```bash
-python summarize_website.py --url http://www.example.com --num_sentences 3 --stop_words the a an --bonus_words important
+uvicorn app:api --reload
 ```
 
 This will retrieve the HTML of the website at the specified url, extract the text from the HTML, preprocess the text (optional), and then use the LsaSummarizer to generate a summary of the text consisting of 3 sentences. The stop_words and bonus_words parameters will be used to specify which words should be given less or more weight in the summarization process.
