@@ -1,6 +1,6 @@
 # Websumry
 
-![websumry](./websumry.webm)
+![websumry](./websumry.gif)
 
 > WebSumry is a powerful tool that helps you quickly summarize the content of a website. With WebSumry, you can easily extract the key points and main ideas from long articles and pages, saving you time and helping you stay informed on the topics that matter to you.
 
