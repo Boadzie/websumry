@@ -25,6 +25,26 @@ def get_html(url):
 
     return buffer.getvalue().decode('iso-8859-1')
 
+# capitalize letter after the period
+def capitalize_after_period(text):
+    # Split the text into a list of sentences
+    sentences = text.split('. ')
+
+    # Return the original text if there are no sentences
+    if not sentences:
+        return text
+
+    # Capitalize the first letter of each sentence
+    for i, sentence in enumerate(sentences):
+        if not sentence.strip():
+            continue
+        sentences[i] = sentence[0].upper() + sentence[1:]
+
+    # Join the sentences back into a single string
+    text = '. '.join(sentences)
+
+    return text
+
 
 # stopwords
 stop_words = set(stopwords.words("english"))
@@ -58,5 +78,7 @@ def summarize_website(url:str, num_sentences:int, bonus_words:Optional[List]):
     summary_text = ""
     for sentence in summary:
         summary_text += str(sentence) + " "
-        
+    
+    summary_text = capitalize_after_period(summary_text)
     return summary_text
+
