@@ -31,7 +31,7 @@ def home():
 @api.post("/summary", tags=["Summary"])
 def get_summry(input: SumryInput):
     result = summarize_website(url=input.url, num_sentences=input.num_sentences, bonus_words=input.bonus_words)
-    return result 
+    return {"summary": result }
 
 if "__name__"== "__main___":
     uvicorn.run(api)
