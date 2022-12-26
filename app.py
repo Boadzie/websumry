@@ -1,4 +1,4 @@
-from fastapi import FastAPI 
+from fastapi import FastAPI, HTTPException
 import uvicorn
 from utils import summarize_website
 from typing import Optional, List
@@ -19,9 +19,9 @@ tags_metadata = [
 api = FastAPI(openapi_tags=tags_metadata, title="Websumry - summarize a website anytime!")
 
 class SumryInput(BaseModel):
-    url:str 
-    num_sentences:int 
-    bonus_words:Optional[List]
+    url: str 
+    num_sentences: int 
+    bonus_words: Optional[List] = ["important"]
 
 @api.get("/", tags=["Home"])
 def home():
@@ -30,8 +30,11 @@ def home():
 
 @api.post("/summary", tags=["Summary"])
 def get_summry(input: SumryInput):
-    result = summarize_website(url=input.url, num_sentences=input.num_sentences, bonus_words=input.bonus_words)
-    return {"summary": result }
+    if input:
+        result = summarize_website(url=input.url, num_sentences=input.num_sentences, bonus_words=input.bonus_words)
+        return {"summary": result }
+    else:
+        raise HTTPException(status_code=500, detail="Please provide the necessary inputs") 
 
 if "__name__"== "__main___":
     uvicorn.run(api)
