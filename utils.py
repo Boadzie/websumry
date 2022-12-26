@@ -15,11 +15,14 @@ nltk.download('punkt')
 nltk.download('stopwords')
 
 
+
 def get_html(url):
     buffer = BytesIO()
     c = pycurl.Curl()
     c.setopt(c.URL, url)
     c.setopt(c.WRITEDATA, buffer)
+    c.setopt(c.HTTPHEADER, ['Accept: application/html', 'User-Agent: Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148'])
+    c.setopt(pycurl.PROXYTYPE, 2)
     c.perform()
     c.close()
 
@@ -49,7 +52,7 @@ def capitalize_after_period(text):
 # stopwords
 stop_words = set(stopwords.words("english"))
 
-def summarize_website(url:str, num_sentences:int, bonus_words:Optional[List]):
+def summarize_website(url: str, num_sentences: int, bonus_words: Optional[List]=["important"]):
     # Retrieve the HTML of the website
     html = get_html(url)
 
@@ -59,7 +62,7 @@ def summarize_website(url:str, num_sentences:int, bonus_words:Optional[List]):
 
     # Preprocess the text (optional)
     text = text.lower()
-    text = text.replace("\n", " ")
+    text = text.replace("\n", " ").strip()
 
     # Create a Sumy PlaintextParser object
     parser = PlaintextParser.from_string(text, Tokenizer("english"))
